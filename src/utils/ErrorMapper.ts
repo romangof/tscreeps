@@ -1,11 +1,13 @@
 import { SourceMapConsumer } from "source-map";
+import _ from "lodash";
 
 export class ErrorMapper {
   // Cache consumer
   private static _consumer?: SourceMapConsumer;
 
   public static get consumer(): SourceMapConsumer {
-    if (this._consumer == null) {
+    if (!this._consumer) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-var-requires
       this._consumer = new SourceMapConsumer(require("main.js.map"));
     }
 
@@ -78,7 +80,9 @@ export class ErrorMapper {
             const message = `Source maps don't work in the simulator - displaying original error`;
             console.log(`<span style='color:red'>${message}<br>${_.escape(e.stack)}</span>`);
           } else {
-            console.log(`<span style='color:red'>${_.escape(this.sourceMappedStackTrace(e))}</span>`);
+            console.log(
+              `<span style='color:red'>${_.escape(this.sourceMappedStackTrace(e))}</span>`
+            );
           }
         } else {
           // can't handle it

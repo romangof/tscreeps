@@ -2,31 +2,30 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    node: true
+    node: true,
   },
   extends: [
     "eslint:recommended",
+    "eslint-config-prettier",
+    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:prettier/recommended",
-    "prettier/@typescript-eslint",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:import/typescript"
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: "tsconfig.json",
-    sourceType: "module"
+    project: "./tsconfig.json",
+    sourceType: "module",
   },
-  plugins: ["@typescript-eslint", "import"],
+  plugins: ["@typescript-eslint", "import", "simple-import-sort", "unused-imports"],
   settings: {
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+      "@typescript-eslint/parser": [".ts", ".tsx"],
     },
     "import/resolver": {
-      typescript: {}
-    }
+      typescript: {},
+    },
   },
   rules: {
     "@typescript-eslint/array-type": "error",
@@ -36,16 +35,16 @@ module.exports = {
     "@typescript-eslint/explicit-member-accessibility": [
       "error",
       {
-        accessibility: "explicit"
-      }
+        accessibility: "explicit",
+      },
     ],
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-parameter-properties": "off",
     "@typescript-eslint/no-shadow": [
       "error",
       {
-        hoist: "all"
-      }
+        hoist: "all",
+      },
     ],
     "@typescript-eslint/no-unused-expressions": "error",
     "@typescript-eslint/no-use-before-define": ["error", { functions: false }],
@@ -59,7 +58,17 @@ module.exports = {
     "eol-last": "off",
     eqeqeq: ["error", "smart"],
     "guard-for-in": "off",
-    "id-blacklist": ["error", "any", "Number", "number", "String", "string", "Boolean", "boolean", "Undefined"],
+    "id-blacklist": [
+      "error",
+      "any",
+      "Number",
+      "number",
+      "String",
+      "string",
+      "Boolean",
+      "boolean",
+      "Undefined",
+    ],
     "id-match": "error",
     "linebreak-style": "off",
     "max-classes-per-file": ["error", 1],
